@@ -1,4 +1,12 @@
 import { Metadata } from 'next';
+import { Layout } from '@/components/layout/layout';
+import { HeroSection } from '@/components/sections/hero-section';
+import { AboutSection } from '@/components/sections/about-section';
+import { SkillsSection } from '@/components/sections/skills-section';
+import { ProjectsSection } from '@/components/sections/projects-section';
+import { StatsSection } from '@/components/sections/stats-section';
+import { TestimonialsSection } from '@/components/sections/testimonials-section';
+import { ContactSection } from '@/components/sections/contact-section';
 import { personalInfo } from '@/data/personal';
 
 // 页面元数据
@@ -18,20 +26,27 @@ export const metadata: Metadata = {
  */
 export default function HomePage() {
   return (
-    <div className="min-h-screen bg-white dark:bg-neutral-900">
-      <div className="container mx-auto px-4 py-16">
-        <div className="text-center">
-          <h1 className="text-4xl lg:text-6xl font-bold text-neutral-900 dark:text-white mb-4">
-            {personalInfo.chineseName}
-          </h1>
-          <p className="text-xl text-neutral-600 dark:text-neutral-400 mb-8">
-            {personalInfo.title}
-          </p>
-          <p className="text-lg text-neutral-600 dark:text-neutral-400 max-w-2xl mx-auto">
-            {personalInfo.bio}
-          </p>
-        </div>
-      </div>
-    </div>
+    <Layout>
+      {/* 英雄区域 - 主要介绍和CTA */}
+      <HeroSection />
+
+      {/* 关于我简介 */}
+      <AboutSection />
+
+      {/* 统计数据 */}
+      <StatsSection />
+
+      {/* 核心技能展示 */}
+      <SkillsSection />
+
+      {/* 精选作品展示 */}
+      <ProjectsSection />
+
+      {/* 客户评价 */}
+      <TestimonialsSection />
+
+      {/* 联系我 */}
+      <ContactSection />
+    </Layout>
   );
 }
