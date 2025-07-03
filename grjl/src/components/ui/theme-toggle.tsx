@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import { Moon, Sun } from 'lucide-react';
-import { useTheme } from '@/components/providers/theme-provider';
+import { useTheme } from 'next-themes';
 import { cn } from '@/lib/utils';
 
 interface ThemeToggleProps {
@@ -15,12 +15,12 @@ interface ThemeToggleProps {
  * 主题切换按钮组件
  * 支持在亮色和暗色主题之间切换
  */
-export function ThemeToggle({ 
-  className, 
-  size = 'md', 
-  variant = 'ghost' 
+export function ThemeToggle({
+  className,
+  size = 'md',
+  variant = 'ghost'
 }: ThemeToggleProps) {
-  const { theme, toggleTheme } = useTheme();
+  const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = React.useState(false);
 
   // 确保组件在客户端渲染后才显示，避免水合不匹配
@@ -62,6 +62,10 @@ export function ThemeToggle({
     lg: 24,
   };
 
+  const toggleTheme = () => {
+    setTheme(theme === 'dark' ? 'light' : 'dark');
+  };
+
   return (
     <button
       onClick={toggleTheme}
@@ -95,7 +99,7 @@ export function ThemeToggle({
  * 带动画效果的主题切换按钮
  */
 export function AnimatedThemeToggle({ className, size = 'md' }: ThemeToggleProps) {
-  const { theme, toggleTheme } = useTheme();
+  const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = React.useState(false);
 
   React.useEffect(() => {
@@ -128,6 +132,10 @@ export function AnimatedThemeToggle({ className, size = 'md' }: ThemeToggleProps
     sm: 16,
     md: 20,
     lg: 24,
+  };
+
+  const toggleTheme = () => {
+    setTheme(theme === 'dark' ? 'light' : 'dark');
   };
 
   return (

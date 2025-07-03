@@ -12,19 +12,4 @@ export function ThemeProvider({ children, ...props }: ThemeProviderProps) {
   return <NextThemesProvider {...props}>{children}</NextThemesProvider>;
 }
 
-/**
- * 主题切换钩子
- * 提供主题相关的状态和方法
- */
-export function useTheme() {
-  const { theme, setTheme, resolvedTheme } = require('next-themes').useTheme();
-  
-  return {
-    theme,
-    setTheme,
-    resolvedTheme,
-    isDark: resolvedTheme === 'dark',
-    isLight: resolvedTheme === 'light',
-    toggleTheme: () => setTheme(theme === 'dark' ? 'light' : 'dark'),
-  };
-}
+

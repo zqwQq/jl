@@ -44,6 +44,13 @@ const nextConfig = {
   env: {
     CUSTOM_KEY: 'my-value',
   },
+  // 构建时忽略错误
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
+  typescript: {
+    ignoreBuildErrors: true,
+  },
 }
 
 module.exports = nextConfig

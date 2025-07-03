@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
 import { Inter, Playfair_Display } from 'next/font/google';
-import { ThemeProvider } from '@/components/providers/theme-provider';
 import { personalInfo } from '@/data/personal';
 import './globals.css';
 
@@ -211,36 +210,7 @@ export default function RootLayout({
         />
       </head>
       <body className="font-sans antialiased">
-        {/* 主题提供者 */}
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          {/* 应用内容 */}
-          {children}
-          
-          {/* 全局脚本 */}
-          <script
-            dangerouslySetInnerHTML={{
-              __html: `
-                // 防止 FOUC (Flash of Unstyled Content)
-                (function() {
-                  const theme = localStorage.getItem('theme') || 'system';
-                  const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-                  const actualTheme = theme === 'system' ? systemTheme : theme;
-                  
-                  if (actualTheme === 'dark') {
-                    document.documentElement.classList.add('dark');
-                  } else {
-                    document.documentElement.classList.remove('dark');
-                  }
-                })();
-              `,
-            }}
-          />
-        </ThemeProvider>
+        {children}
       </body>
     </html>
   );
