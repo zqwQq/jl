@@ -69,38 +69,38 @@ export function Header() {
   return (
     <header
       className={cn(
-        'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
+        'fixed top-0 left-0 right-0 z-50 transition-all duration-500',
         isScrolled
-          ? 'bg-white/80 dark:bg-neutral-900/80 backdrop-blur-md border-b border-neutral-200/50 dark:border-neutral-800/50 shadow-sm'
+          ? 'glass shadow-2xl border-b border-white/20'
           : 'bg-transparent'
       )}
     >
-      <div className="container-custom">
-        <div className="flex items-center justify-between h-16 lg:h-20">
-          {/* Logo */}
+      <div className="container-modern">
+        <div className="flex items-center justify-between h-20 lg:h-24">
+          {/* 现代化Logo */}
           <Link
             href="/"
-            className="flex items-center space-x-3 group"
+            className="flex items-center space-x-4 group"
             onClick={closeMobileMenu}
           >
             <div className="relative">
-              <div className="w-10 h-10 bg-gradient-to-br from-primary-600 to-secondary-600 rounded-xl flex items-center justify-center text-white font-bold text-lg transition-transform duration-200 group-hover:scale-110">
+              <div className="w-12 h-12 bg-gradient-primary rounded-2xl flex items-center justify-center text-white font-bold text-xl transition-all duration-300 group-hover:scale-110 group-hover:rotate-3 shadow-lg">
                 {personalInfo.chineseName.charAt(0)}
               </div>
-              <div className="absolute -inset-1 bg-gradient-to-br from-primary-600 to-secondary-600 rounded-xl opacity-0 group-hover:opacity-20 transition-opacity duration-200 blur-sm" />
+              <div className="absolute -inset-2 bg-gradient-primary rounded-2xl opacity-0 group-hover:opacity-30 transition-all duration-300 blur-lg animate-pulse" />
             </div>
             <div className="hidden sm:block">
-              <div className="font-bold text-lg text-neutral-900 dark:text-white">
+              <div className="font-bold text-xl text-white group-hover:text-white/90 transition-colors">
                 {personalInfo.chineseName}
               </div>
-              <div className="text-sm text-neutral-600 dark:text-neutral-400 -mt-1">
+              <div className="text-sm text-white/70 -mt-1 font-medium">
                 {personalInfo.title}
               </div>
             </div>
           </Link>
 
-          {/* 桌面端导航 */}
-          <nav className="hidden lg:flex items-center space-x-1">
+          {/* 现代化桌面端导航 */}
+          <nav className="hidden lg:flex items-center space-x-2">
             {navigationItems.map((item) => {
               const isActive = pathname === item.href;
               return (
@@ -108,76 +108,77 @@ export function Header() {
                   key={item.href}
                   href={item.href}
                   className={cn(
-                    'flex items-center space-x-2 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200',
-                    'hover:bg-neutral-100 dark:hover:bg-neutral-800',
+                    'flex items-center space-x-2 px-6 py-3 rounded-2xl text-sm font-semibold transition-all duration-300 relative overflow-hidden group',
                     isActive
-                      ? 'text-primary-600 dark:text-primary-400 bg-primary-50 dark:bg-primary-900/20'
-                      : 'text-neutral-700 dark:text-neutral-300'
+                      ? 'text-white bg-white/20 backdrop-blur-md border border-white/30 shadow-lg'
+                      : 'text-white/80 hover:text-white hover:bg-white/10 hover:backdrop-blur-md hover:border hover:border-white/20'
                   )}
                 >
-                  <item.icon size={16} />
+                  <item.icon size={18} />
                   <span>{item.name}</span>
+                  {isActive && (
+                    <div className="absolute inset-0 bg-gradient-primary opacity-20 rounded-2xl" />
+                  )}
                 </Link>
               );
             })}
           </nav>
 
-          {/* 右侧操作区 */}
-          <div className="flex items-center space-x-2">
+          {/* 现代化右侧操作区 */}
+          <div className="flex items-center space-x-4">
             {/* 主题切换按钮 */}
-            <ThemeToggle size="md" variant="ghost" />
+            <div className="glass rounded-2xl p-2">
+              <ThemeToggle size="md" variant="ghost" />
+            </div>
 
             {/* 联系按钮 - 桌面端显示 */}
             <div className="hidden lg:block">
-              <Button
-                asChild
-                variant="gradient"
-                size="sm"
-                className="ml-2"
-              >
-                <Link href="/contact">
-                  开始合作
+              <button className="btn btn-secondary px-6 py-3 text-sm font-semibold">
+                <Link href="/contact" className="flex items-center space-x-2">
+                  <Mail size={18} />
+                  <span>开始合作</span>
                 </Link>
-              </Button>
+              </button>
             </div>
 
-            {/* 移动端菜单按钮 */}
-            <Button
-              variant="ghost"
-              size="icon"
-              className="lg:hidden"
+            {/* 现代化移动端菜单按钮 */}
+            <button
+              className="lg:hidden glass rounded-2xl p-3 text-white transition-all duration-300 hover:scale-110"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               aria-label="切换菜单"
             >
-              {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
-            </Button>
+              {isMenuOpen ? <X size={22} /> : <Menu size={22} />}
+            </button>
           </div>
         </div>
 
-        {/* 移动端导航菜单 */}
+        {/* 现代化移动端导航菜单 */}
         {isMenuOpen && (
           <div className="lg:hidden">
-            <div className="px-2 pt-2 pb-3 space-y-1 bg-white dark:bg-neutral-900 border-t border-neutral-200 dark:border-neutral-800">
-              {navigationItems.map((item) => {
-                const isActive = pathname === item.href;
-                return (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    className={cn(
-                      'flex items-center space-x-3 px-3 py-3 rounded-lg text-base font-medium transition-all duration-200',
-                      'hover:bg-neutral-100 dark:hover:bg-neutral-800',
-                      isActive
-                        ? 'text-primary-600 dark:text-primary-400 bg-primary-50 dark:bg-primary-900/20'
-                        : 'text-neutral-700 dark:text-neutral-300'
-                    )}
-                    onClick={closeMobileMenu}
-                  >
-                    <item.icon size={20} />
-                    <span>{item.name}</span>
-                  </Link>
-                );
-              })}
+            <div className="glass border-t border-white/20 backdrop-blur-xl">
+              <div className="px-6 pt-6 pb-8 space-y-3">
+                {navigationItems.map((item) => {
+                  const isActive = pathname === item.href;
+                  return (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      className={cn(
+                        'flex items-center space-x-4 px-4 py-4 rounded-2xl text-lg font-semibold transition-all duration-300 relative overflow-hidden group',
+                        isActive
+                          ? 'text-white bg-white/20 backdrop-blur-md border border-white/30 shadow-lg'
+                          : 'text-white/80 hover:text-white hover:bg-white/10 hover:backdrop-blur-md'
+                      )}
+                      onClick={closeMobileMenu}
+                    >
+                      <item.icon size={24} />
+                      <span>{item.name}</span>
+                      {isActive && (
+                        <div className="absolute inset-0 bg-gradient-primary opacity-20 rounded-2xl" />
+                      )}
+                    </Link>
+                  );
+                })}
               
               {/* 移动端联系按钮 */}
               <div className="pt-4 border-t border-neutral-200 dark:border-neutral-800">
